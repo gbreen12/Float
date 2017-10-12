@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace Float.Services
 {
@@ -41,6 +42,9 @@ namespace Float.Services
         public T Create(T model)
         {
             var response = Rest.PostV3(BaseEndpoint, model);
+            if ((int)response.StatusCode == 422)
+                throw new ValidationException(response.Content);
+
             return response.Data;
         }
 
@@ -50,10 +54,10 @@ namespace Float.Services
             return response.Data;
         }
 
-        public T Delete(int id)
+        public bool Delete(int id)
         {
             var response = Rest.Delete<T>($"{BaseEndpoint}/{id}");
-            return response.Data;
+            return response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.NotFound;
         }
     }
 
@@ -65,6 +69,6 @@ namespace Float.Services
         T GetInstance(int id);
         T Create(T model);
         T Update(int id, T model);
-        T Delete(int id);
+        bool Delete(int id);
     }
 }

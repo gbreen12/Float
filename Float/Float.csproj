@@ -61,6 +61,7 @@
     <Compile Include="Services\FloatServiceV3.cs" />
     <Compile Include="Services\PeopleServiceV3.cs" />
     <Compile Include="Services\ProjectServiceV3.cs" />
+    <Compile Include="ValidationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

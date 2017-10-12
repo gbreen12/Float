@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RestSharp.Serializers;
+using System;
 using System.IO;
 
 namespace Float
@@ -69,5 +70,49 @@ namespace Float
         /// Content type for serialized content
         /// </summary>
         public string ContentType { get; set; }
+    }
+
+    public class BoolConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(bool);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
+        {
+            return reader.Value.ToString() == "1";
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
+        {
+            writer.WriteValue(((bool)value) ? 1 : 0);
+        }
+    }
+
+    public class DateConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(DateTime) || objectType == typeof(DateTime?);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
+        {
+            if (reader.Value != null)
+                return DateTime.Parse(reader.Value.ToString());
+            else if (objectType == typeof(DateTime?))
+                return null;
+            else
+                return DateTime.MinValue;
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
+        {
+            if (value == null)
+                writer.WriteValue((DateTime?)null);
+            else
+                writer.WriteValue(((DateTime)value).ToString("yyyy-MM-dd"));
+        }
     }
 }

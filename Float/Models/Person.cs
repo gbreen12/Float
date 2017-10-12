@@ -11,6 +11,7 @@ namespace Float.Models
         [JsonProperty("active")]
         public bool Active { get; set; }
         [JsonProperty("auto_email")]
+        [JsonConverter(typeof(BoolConverter))]
         public bool AutoEmail { get; set; }
         public string AvatarFile { get; set; }
         [JsonProperty("contractor")]
@@ -22,6 +23,7 @@ namespace Float.Models
         [JsonProperty("employee_type")]
         public EmployeeType EmployeeType { get; set; }
         [JsonProperty("end_date")]
+        [JsonConverter(typeof(DateConverter))]
         public DateTime? EndDate { get; set; }
         [JsonProperty("job_title")]
         public string JobTitle { get; set; }
@@ -32,6 +34,7 @@ namespace Float.Models
         [JsonProperty("notes")]
         public string Notes { get; set; }
         [JsonProperty("start_date")]
+        [JsonConverter(typeof(DateConverter))]
         public DateTime? StartDate { get; set; }
         [JsonProperty("tags")]
         public List<PersonTag> Tags { get; set; }
