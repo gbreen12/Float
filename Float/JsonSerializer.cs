@@ -115,4 +115,15 @@ namespace Float
                 writer.WriteValue(((DateTime)value).ToString("yyyy-MM-dd"));
         }
     }
+
+    public class TimeConverter : DateConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
+        {
+            if (value == null)
+                writer.WriteValue((DateTime?)null);
+            else
+                writer.WriteValue(((DateTime)value).ToString("hh:mm"));
+        }
+    }
 }

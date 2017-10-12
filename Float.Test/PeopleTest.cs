@@ -63,8 +63,8 @@ namespace Float.Test
                 Contractor = true,
                 Department = new Department
                 {
-                    DepartmentId = 53686,
-                    Name = "Department 1"
+                    DepartmentId = TestConstants.DepartmentId,
+                    Name = TestConstants.DepartmentName
                 },
                 Email = "unit@test.float",
                 EmployeeType = EmployeeType.PartTime,
@@ -104,7 +104,7 @@ namespace Float.Test
                 Assert.IsTrue(newPerson.AutoEmail);
                 Assert.IsTrue(newPerson.Contractor);
                 Assert.IsNotNull(newPerson.Department);
-                Assert.AreEqual("Department 1", newPerson.Department.Name);
+                Assert.AreEqual(TestConstants.DepartmentName, newPerson.Department.Name);
                 Assert.AreEqual("unit@test.float", newPerson.Email);
                 Assert.AreEqual(EmployeeType.PartTime, newPerson.EmployeeType);
                 Assert.AreEqual("Title", newPerson.JobTitle);
@@ -181,8 +181,8 @@ namespace Float.Test
                     Contractor = true,
                     Department = new Department
                     {
-                        DepartmentId = 53686,
-                        Name = "Department 1"
+                        DepartmentId = TestConstants.DepartmentId,
+                        Name = TestConstants.DepartmentName
                     },
                     Email = "unit@test.float",
                     EmployeeType = EmployeeType.PartTime,
@@ -220,7 +220,7 @@ namespace Float.Test
                 Assert.IsTrue(newPerson.AutoEmail);
                 Assert.IsTrue(newPerson.Contractor);
                 Assert.IsNotNull(newPerson.Department);
-                Assert.AreEqual("Department 1", newPerson.Department.Name);
+                Assert.AreEqual(TestConstants.DepartmentName, newPerson.Department.Name);
                 Assert.AreEqual("unit@test.float", newPerson.Email);
                 Assert.AreEqual(EmployeeType.PartTime, newPerson.EmployeeType);
                 Assert.AreEqual("Title", newPerson.JobTitle);

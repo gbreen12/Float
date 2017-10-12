@@ -20,11 +20,19 @@ namespace Float.Services
                 page++;
                 var response = Rest.GetV3<List<T>>($"{BaseEndpoint}?page={page}&per-page=200");
                 results.AddRange(response.Data);
-                totalResultCount = limit ?? int.Parse(response.Headers.Single(x => x.Name == Rest.TOTAL_COUNT).Value.ToString());
+                totalResultCount = GetTotalResultCount(limit, response.GetTotalResultCount());
             }
             while (results.Count < totalResultCount);
 
             return results.Take(limit ?? results.Count);
+        }
+
+        private int GetTotalResultCount(int? limit, int actualTotal)
+        {
+            if (limit.HasValue && limit.Value <= actualTotal)
+                return limit.Value;
+            else
+                return actualTotal;
         }
 
         public IEnumerable<T> GetCollection(int page, int perPage)
@@ -36,12 +44,17 @@ namespace Float.Services
         public T GetInstance(int id)
         {
             var response = Rest.GetV3<T>($"{BaseEndpoint}/{id}");
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                return null;
+
             return response.Data;
         }
 
         public T Create(T model)
         {
             var response = Rest.PostV3(BaseEndpoint, model);
+
             if ((int)response.StatusCode == 422)
                 throw new ValidationException(response.Content);
 
@@ -51,6 +64,13 @@ namespace Float.Services
         public T Update(int id, T model)
         {
             var response = Rest.PatchV3($"{BaseEndpoint}/{id}", model);
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                return null;
+
+            if ((int)response.StatusCode == 422)
+                throw new ValidationException(response.Content);
+
             return response.Data;
         }
 

@@ -23,4 +23,12 @@
         Yellow = 2,
         Green = 3
     }
+
+    public enum RepeatState
+    {
+        NoRepeat = 0,
+        Weekly = 1,
+        Monthly = 2,
+        EveryTwoWeeks = 3
+    }
 }
