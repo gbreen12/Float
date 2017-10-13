@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.githubusercontent.com/gbreen12/Float/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/gbreen12/Float</projectUrl>
+    <iconUrl>https://www.nuget.org/Content/gallery/img/default-package-icon.svg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial Alpha Release</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>Float.com C#</tags>
+  </metadata>
+</package>
