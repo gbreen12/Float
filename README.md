@@ -24,3 +24,13 @@ The second way is in code:
 FloatConfig.AuthToken = "TOKEN";
 FloatConfig.UserAgent = "AGENT";
 ```
+
+# How it works
+
+The code has a mechanism for detecting changes and only sending changed fields in creates and updates. The only exception are collections. If an object includes a collection, it will always be sent. (Note: if anyone wants to update this please do and create a pull request.)
+
+When getting objects from the api, it will automatically set all the properties to clean. Any changes will be tracked and updated on update.
+
+# Issues
+
+Please add any issues you find and I will do my best to fix them.
