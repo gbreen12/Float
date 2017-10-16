@@ -11,7 +11,7 @@
     <iconUrl>https://www.nuget.org/Content/gallery/img/default-package-icon.svg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial Alpha Release</releaseNotes>
+    <releaseNotes>No Release Notes</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>Float.com C#</tags>
   </metadata>
