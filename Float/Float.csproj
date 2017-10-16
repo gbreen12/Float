@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="FloatConfig.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="RestResponseExtensions.cs" />
     <Compile Include="JsonSerializer.cs" />
     <Compile Include="Models\Department.cs" />

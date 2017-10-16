@@ -25,7 +25,7 @@ namespace Float
             return V3.Execute<T>(GetRequest(endpoint, Method.POST, model));
         }
 
-        internal static IRestResponse<T> PatchV3<T>(string endpoint, T model)
+        internal static IRestResponse<T> PatchV3<T>(string endpoint, object model)
             where T : class, new()
         {
             return V3.Execute<T>(GetRequest(endpoint, Method.PATCH, model));

@@ -46,7 +46,7 @@ namespace Float.Test
         public void GetProjectTest()
         {
             var project = _projectService.GetCollection(1).Single();
-            project = _projectService.GetInstance(project.ProjectId);
+            project = _projectService.GetInstance(project.ID);
 
             Assert.IsNotNull(project);
         }
@@ -88,7 +88,7 @@ namespace Float.Test
             }
             finally
             {
-                _projectService.Delete(newProject.ProjectId);
+                _projectService.Delete(newProject.ID);
             }
         }
 
@@ -118,7 +118,7 @@ namespace Float.Test
             }
             finally
             {
-                _projectService.Delete(newProject.ProjectId);
+                _projectService.Delete(newProject.ID);
             }
         }
 
@@ -148,7 +148,7 @@ namespace Float.Test
 
                 newProject = new Project
                 {
-                    ProjectId = newProject.ProjectId,
+                    ID = newProject.ID,
                     Active = true,
                     AllPmsSchedule = true,
                     ClientId = TestConstants.ClientId,
@@ -161,7 +161,7 @@ namespace Float.Test
                     Tentative = true
                 };
 
-                newProject = _projectService.Update(newProject.ProjectId, newProject);
+                newProject = _projectService.Update(newProject.ID, newProject);
 
                 Assert.IsNotNull(newProject);
                 Assert.IsTrue(newProject.Active);
@@ -178,7 +178,7 @@ namespace Float.Test
             }
             finally
             {
-                _projectService.Delete(newProject.ProjectId);
+                _projectService.Delete(newProject.ID);
             }
         }
 
@@ -194,7 +194,7 @@ namespace Float.Test
 
             Assert.IsNotNull(newProject);
 
-            Assert.IsTrue(_projectService.Delete(newProject.ProjectId));
+            Assert.IsTrue(_projectService.Delete(newProject.ID));
         }
     }
 }

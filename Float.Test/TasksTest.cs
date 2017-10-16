@@ -46,7 +46,7 @@ namespace Float.Test
         public void GetTaskTest()
         {
             var task = _taskService.GetCollection(1).Single();
-            task = _taskService.GetInstance(task.TaskId);
+            task = _taskService.GetInstance(task.ID);
 
             Assert.IsNotNull(task);
         }
@@ -89,7 +89,7 @@ namespace Float.Test
             }
             finally
             {
-                _taskService.Delete(newTask.TaskId);
+                _taskService.Delete(newTask.ID);
             }
         }
 
@@ -125,7 +125,7 @@ namespace Float.Test
             }
             finally
             {
-                _taskService.Delete(newTask.TaskId);
+                _taskService.Delete(newTask.ID);
             }
         }
 
@@ -161,7 +161,7 @@ namespace Float.Test
 
                 newTask = new FloatTask
                 {
-                    TaskId = newTask.TaskId,
+                    ID = newTask.ID,
                     EndDate = now,
                     Hours = 5.5m,
                     Name = "Unit Test Task",
@@ -175,7 +175,7 @@ namespace Float.Test
                     StartTime = now
                 };
 
-                newTask = _taskService.Update(newTask.TaskId, newTask);
+                newTask = _taskService.Update(newTask.ID, newTask);
 
                 Assert.IsNotNull(newTask);
                 Assert.IsNotNull(newTask.EndDate);
@@ -192,7 +192,7 @@ namespace Float.Test
             }
             finally
             {
-                _taskService.Delete(newTask.TaskId);
+                _taskService.Delete(newTask.ID);
             }
         }
 
@@ -213,7 +213,7 @@ namespace Float.Test
 
             Assert.IsNotNull(newTask);
 
-            Assert.IsTrue(_taskService.Delete(newTask.TaskId));
+            Assert.IsTrue(_taskService.Delete(newTask.ID));
         }
     }
 }

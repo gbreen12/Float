@@ -47,7 +47,7 @@ namespace Float.Test
         public void GetPersonTest()
         {
             var person = _peopleService.GetCollection(1).Single();
-            person = _peopleService.GetInstance(person.PeopleId);
+            person = _peopleService.GetInstance(person.ID);
 
             Assert.IsNotNull(person);
         }
@@ -124,7 +124,7 @@ namespace Float.Test
             }
             finally
             {
-                _peopleService.Delete(newPerson.PeopleId);
+                _peopleService.Delete(newPerson.ID);
             }
         }
 
@@ -143,10 +143,10 @@ namespace Float.Test
                 Assert.IsNotNull(newPerson);
                 Assert.AreEqual("Unit Test User", newPerson.Name);
                 Assert.IsFalse(newPerson.Active);
-                Assert.IsFalse(newPerson.AutoEmail);
+                Assert.IsTrue(newPerson.AutoEmail);
                 Assert.IsFalse(newPerson.Contractor);
                 Assert.IsNull(newPerson.Department);
-                Assert.AreEqual(EmployeeType.PartTime, newPerson.EmployeeType);
+                Assert.AreEqual(EmployeeType.FullTime, newPerson.EmployeeType);
                 Assert.IsNull(newPerson.JobTitle);
                 Assert.IsNull(newPerson.EndDate);
                 Assert.IsNull(newPerson.NonWorkDays);
@@ -156,7 +156,7 @@ namespace Float.Test
             }
             finally
             {
-                _peopleService.Delete(newPerson.PeopleId);
+                _peopleService.Delete(newPerson.ID);
             }
         }
 
@@ -175,7 +175,7 @@ namespace Float.Test
 
                 newPerson = new Person
                 {
-                    PeopleId = newPerson.PeopleId,
+                    ID = newPerson.ID,
                     Active = true,
                     AutoEmail = true,
                     Contractor = true,
@@ -213,7 +213,7 @@ namespace Float.Test
                     WorkDayHours = 5.5m
                 };
 
-                newPerson = _peopleService.Update(newPerson.PeopleId, newPerson);
+                newPerson = _peopleService.Update(newPerson.ID, newPerson);
 
                 Assert.IsNotNull(newPerson);
                 Assert.IsTrue(newPerson.Active);
@@ -240,7 +240,7 @@ namespace Float.Test
             }
             finally
             {
-                _peopleService.Delete(newPerson.PeopleId);
+                _peopleService.Delete(newPerson.ID);
             }
         }
 
@@ -256,7 +256,7 @@ namespace Float.Test
 
             Assert.IsNotNull(newPerson);
 
-            Assert.IsTrue(_peopleService.Delete(newPerson.PeopleId));
+            Assert.IsTrue(_peopleService.Delete(newPerson.ID));
         }
     }
 }

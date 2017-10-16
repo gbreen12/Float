@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Float.Models;
+using RestSharp;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
 namespace Float.Services
 {
     public abstract class FloatServiceV3<T> : IFloatServiceV3<T>
-        where T : class, new()
+        where T : BaseModel, new()
     {
         protected abstract string BaseEndpoint { get; }
 
@@ -24,7 +26,12 @@ namespace Float.Services
             }
             while (results.Count < totalResultCount);
 
-            return results.Take(limit ?? results.Count);
+            results = results.Take(limit ?? results.Count).ToList();
+
+            foreach (var result in results)
+                GetCleanResult(result);
+
+            return results;
         }
 
         private int GetTotalResultCount(int? limit, int actualTotal)
@@ -38,7 +45,12 @@ namespace Float.Services
         public IEnumerable<T> GetCollection(int page, int perPage)
         {
             var response = Rest.GetV3<List<T>>($"{BaseEndpoint}?page={page}&per-page={perPage}");
-            return response.Data;
+            var results = response.Data;
+
+            foreach (var result in results)
+                GetCleanResult(result);
+
+            return results;
         }
 
         public T GetInstance(int id)
@@ -48,7 +60,7 @@ namespace Float.Services
             if (response.StatusCode == HttpStatusCode.NotFound)
                 return null;
 
-            return response.Data;
+            return GetCleanResult(response.Data);
         }
 
         public T Create(T model)
@@ -58,12 +70,14 @@ namespace Float.Services
             if ((int)response.StatusCode == 422)
                 throw new ValidationException(response.Content);
 
-            return response.Data;
+            return GetCleanResult(response.Data);
         }
 
-        public T Update(int id, T model)
+        public T Update(int id, T model, bool fullUpdate = false)
         {
-            var response = Rest.PatchV3($"{BaseEndpoint}/{id}", model);
+            model.FullUpdate = fullUpdate;
+
+            IRestResponse<T> response = Rest.PatchV3<T>($"{BaseEndpoint}/{id}", model);
 
             if (response.StatusCode == HttpStatusCode.NotFound)
                 return null;
@@ -71,13 +85,22 @@ namespace Float.Services
             if ((int)response.StatusCode == 422)
                 throw new ValidationException(response.Content);
 
-            return response.Data;
+            return GetCleanResult(response.Data);
         }
 
         public bool Delete(int id)
         {
             var response = Rest.Delete<T>($"{BaseEndpoint}/{id}");
             return response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.NotFound;
+        }
+
+        private T GetCleanResult(T result)
+        {
+            if (result == null)
+                return null;
+
+            result.ClearDirty();
+            return result;
         }
     }
 
@@ -88,7 +111,7 @@ namespace Float.Services
         IEnumerable<T> GetCollection(int page, int perPage);
         T GetInstance(int id);
         T Create(T model);
-        T Update(int id, T model);
+        T Update(int id, T model, bool fullUpdate = false);
         bool Delete(int id);
     }
 }
