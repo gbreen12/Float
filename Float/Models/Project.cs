@@ -61,7 +61,11 @@ namespace Float.Models
             set => SetProperty(ref _serializeProjectManager, ref _projectManager, value);
         }
         [JsonProperty("tags")]
-        public List<string> Tags { get; set; }
+        public List<string> Tags
+        {
+            get => _tags;
+            set => SetProperty(ref _serializeTags, ref _tags, value);
+        }
         [JsonProperty("tentative")]
         [JsonConverter(typeof(BoolConverter))]
         public bool Tentative
@@ -109,7 +113,9 @@ namespace Float.Models
         private bool _serializeTentative;
         public bool ShouldSerializeTentative() => FullUpdate || _serializeTentative;
 
-        public bool ShouldSerializeTags() => ID == 0;
+        private List<string> _tags;
+        private bool _serializeTags;
+        public bool ShouldSerializeTags() => FullUpdate || _serializeTags;
 
         public override void ClearDirty()
         {
@@ -121,6 +127,7 @@ namespace Float.Models
             _serializeNonBillable = false;
             _serializeNotes = false;
             _serializeProjectManager = false;
+            _serializeTags = false;
             _serializeTentative = false;
         }
     }

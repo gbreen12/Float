@@ -93,7 +93,7 @@ namespace Float.Test
         }
 
         [TestMethod]
-        public void CreatePersonSimpleTest()
+        public void CreateProjectSimpleTest()
         {
             var newProject = new Project
             {
@@ -112,7 +112,6 @@ namespace Float.Test
                 Assert.IsNull(newProject.Notes);
                 Assert.AreEqual("Unit Test Client", newProject.Name);
                 Assert.IsFalse(newProject.NonBillable);
-                Assert.IsNull(newProject.ProjectManager);
                 Assert.AreEqual(0, newProject.Tags.Count);
                 Assert.IsFalse(newProject.Tentative);
             }
@@ -142,7 +141,6 @@ namespace Float.Test
                 Assert.IsNull(newProject.Notes);
                 Assert.AreEqual("Unit Test Client", newProject.Name);
                 Assert.IsFalse(newProject.NonBillable);
-                Assert.IsNull(newProject.ProjectManager);
                 Assert.AreEqual(0, newProject.Tags.Count);
                 Assert.IsFalse(newProject.Tentative);
 
@@ -173,7 +171,7 @@ namespace Float.Test
                 Assert.IsTrue(newProject.NonBillable);
                 Assert.AreEqual(TestConstants.ProjectManagerId, newProject.ProjectManager);
                 Assert.IsNotNull(newProject.Tags);
-                Assert.AreEqual(0, newProject.Tags.Count);
+                Assert.AreEqual(2, newProject.Tags.Count);
                 Assert.IsTrue(newProject.Tentative);
             }
             finally

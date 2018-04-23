@@ -82,7 +82,7 @@ namespace Float.Test
                 Assert.AreEqual(TestConstants.PersonId, newTask.PeopleId);
                 Assert.IsTrue(newTask.Priority);
                 Assert.AreEqual(TestConstants.ProjectId, newTask.ProjectId);
-                //Assert.IsNotNull(newTask.RepeatEndDate);
+                Assert.IsNotNull(newTask.RepeatEndDate);
                 Assert.AreEqual(RepeatState.Weekly, newTask.RepeatState);
                 Assert.IsNotNull(newTask.StartDate);
                 Assert.IsNotNull(newTask.StartTime);
@@ -185,7 +185,7 @@ namespace Float.Test
                 Assert.AreEqual(TestConstants.PersonId, newTask.PeopleId);
                 Assert.IsTrue(newTask.Priority);
                 Assert.AreEqual(TestConstants.ProjectId, newTask.ProjectId);
-                //Assert.IsNotNull(newTask.RepeatEndDate);
+                Assert.IsNotNull(newTask.RepeatEndDate);
                 Assert.AreEqual(RepeatState.Weekly, newTask.RepeatState);
                 Assert.IsNotNull(newTask.StartDate);
                 Assert.IsNotNull(newTask.StartTime);

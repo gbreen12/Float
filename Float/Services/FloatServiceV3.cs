@@ -1,5 +1,6 @@
 ﻿using Float.Models;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -69,6 +70,8 @@ namespace Float.Services
 
             if ((int)response.StatusCode == 422)
                 throw new ValidationException(response.Content);
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+                throw new UnauthorizedAccessException("You are not authorized.");
 
             return GetCleanResult(response.Data);
         }
@@ -81,9 +84,10 @@ namespace Float.Services
 
             if (response.StatusCode == HttpStatusCode.NotFound)
                 return null;
-
-            if ((int)response.StatusCode == 422)
+            else if ((int)response.StatusCode == 422)
                 throw new ValidationException(response.Content);
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+                throw new UnauthorizedAccessException("You are not authorized.");
 
             return GetCleanResult(response.Data);
         }
