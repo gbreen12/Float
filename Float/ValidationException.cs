@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Float
 {
@@ -21,6 +22,8 @@ namespace Float
         {
             ValidationErrors = validationErrors;
         }
+
+        public override string Message => string.Join(Environment.NewLine, ValidationErrors.Select(x => $"{x.Field}: {x.Message}"));
     }
 
     public class ValidationError
