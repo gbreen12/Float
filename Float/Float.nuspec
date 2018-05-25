@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-		Can now update tags on projects
+        Added a message to the ValidationException
 	</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>Float.com C#</tags>
