@@ -1,4 +1,5 @@
 ﻿using Float.Models;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -69,7 +70,7 @@ namespace Float.Services
             var response = Rest.PostV3(BaseEndpoint, model);
 
             if ((int)response.StatusCode == 422)
-                throw new ValidationException(response.Content);
+                throw new ValidationException() { ValidationErrors = JsonConvert.DeserializeObject<List<ValidationError>>(response.Content) };
             else if (response.StatusCode == HttpStatusCode.Unauthorized)
                 throw new UnauthorizedAccessException("You are not authorized.");
 
@@ -85,7 +86,7 @@ namespace Float.Services
             if (response.StatusCode == HttpStatusCode.NotFound)
                 return null;
             else if ((int)response.StatusCode == 422)
-                throw new ValidationException(response.Content);
+                throw new ValidationException() { ValidationErrors = JsonConvert.DeserializeObject<List<ValidationError>>(response.Content) };
             else if (response.StatusCode == HttpStatusCode.Unauthorized)
                 throw new UnauthorizedAccessException("You are not authorized.");
 
