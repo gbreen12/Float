@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-        Added a message to the ValidationException
+        Allowing the correct Message to be serialized in ValidationException
 	</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>Float.com C#</tags>
